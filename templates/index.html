@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Triumph Tidings</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .chat-box {
+            max-height: 460px;
+            height: 455px;
+            overflow-y: scroll;
+            border-radius: 40px;
+            border: solid black;
+            background-image: url('/static/scene3.jpg');            
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .user-message-wrapper {
+            text-align: right;
+        }
+        .user-message {
+            color: white;
+            font-family: sans-serif;
+            font-weight: bold;
+            background-color: #6746FF;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .bot-message {
+            text-align: left;
+            color: black;
+            font-family: sans-serif;
+            font-weight: bold;
+            background-color: #87CEEB;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .input-box {
+            border: 2px solid blue;
+            border-radius: 30px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body style="background-color: black; color: white;">
+    <br>
+    <div class="container">
+        <h1 class="text-center">Triumph Tidings</h1>
+        <br>
+        <div class="chat-box">
+            {% for entry in chat_history %}
+                {% if entry.user %}
+                    <div class="user-message-wrapper">
+                        <div class="user-message">{{ entry.user }}</div>
+                    </div>
+                {% endif %}
+                <div class="bot-message">{{ entry.bot }}</div>
+                <div style="clear: both;"></div>
+                <hr>
+            {% endfor %}
+        </div>
+        <form action="/" method="POST">
+            <div class="form-group input-box">
+                <input type="text" class="form-control" name="query" placeholder="Please talk with me..." autofocus style="border-radius: 30px;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="border-radius: 20px;">Send</button>
+        </form>
+    </div>
+
+    <!-- JavaScript to scroll chat box to the bottom -->
+    <script>
+        var chatBox = document.querySelector('.chat-box');
+        chatBox.scrollTop = chatBox.scrollHeight;
+    </script>
+</body>
+</html>
